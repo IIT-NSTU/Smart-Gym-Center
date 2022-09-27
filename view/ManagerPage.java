@@ -43,8 +43,8 @@ public class ManagerPage extends AdminTemplate {
     }
 
     public void setManagerTrainerRegistrationPanel() {
-        managerTrainerRegistrationPanel = new JPanel();
-        managerTrainerRegistrationPanel.setLayout(new BorderLayout(125,125));
+        managerTrainerRegistrationPanel = new ImagePanel(new ImageIcon("GYM.jpg").getImage());
+        managerTrainerRegistrationPanel.setLayout(new BorderLayout(250,150));
         managerTrainerRegistrationPanel.setBackground(Color.WHITE);
 
         managerTrainerRegistrationPanel.add(getNullLabel(),BorderLayout.EAST);
@@ -180,7 +180,6 @@ public class ManagerPage extends AdminTemplate {
     }
 
     public void setSessionsPanel() {
-
         sessionsPanel = new JPanel();
         sessionsPanel.setBackground(Color.WHITE);
         sessionsPanel.setLayout(new BorderLayout(150,20));
@@ -238,7 +237,6 @@ public class ManagerPage extends AdminTemplate {
     }
 
     public void setCustomerDetailsPanel() {
-
         customerDetailsPanel = new JPanel();
         customerDetailsPanel.setLayout(new BorderLayout());
 
@@ -258,14 +256,21 @@ public class ManagerPage extends AdminTemplate {
     }
 
     public void setLogoutPanel() {
-        logoutPanel = new JPanel();
-        logoutPanel.setLayout(new BorderLayout());
+        logoutPanel = new ImagePanel(new ImageIcon("GYM.jpg").getImage());
+        logoutPanel.setLayout(new BorderLayout(250, 150));
 
-        logoutButton = new JButton(getLogoutPageIcon());
+        logoutPanel.add(getNullLabel(),BorderLayout.EAST);
+        logoutPanel.add(getNullLabel(),BorderLayout.WEST);
+        logoutPanel.add(getNullLabel(),BorderLayout.NORTH);
+        logoutPanel.add(getNullLabel(),BorderLayout.SOUTH);
+
+        logoutButton = new JButton("Log Out");
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 20));
         logoutButton.setBorder(null);
         logoutButton.setFocusPainted(false);
+        logoutButton.setBackground(Color.BLUE);
+        logoutButton.setForeground(Color.WHITE);
         logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        logoutButton.setBackground(Color.WHITE);
         logoutPanel.add(logoutButton,BorderLayout.CENTER);
     }
 
@@ -341,3 +346,4 @@ public class ManagerPage extends AdminTemplate {
         return adminRegistrationButton;
     }
 }
+

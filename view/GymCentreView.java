@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 /**
- * This is the GymCentreManagementSystemView Page of this project that Contains all the FrontEnd Programs
+ * This is the GymCentreView Page of this project that Contains all the FrontEnd Programs
  */
 public class GymCentreView extends StartingTemplate {
     private JLabel progressLabel;
@@ -20,7 +20,7 @@ public class GymCentreView extends StartingTemplate {
     private TrainerPage trainerPage;
 
     /**
-     *   Constructor of GymCentreManagementSystemView Class
+     *   Constructor of GymCentreView Class
      */
     public GymCentreView() {
         loginPage = new LoginPage();

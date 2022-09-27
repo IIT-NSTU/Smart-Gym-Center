@@ -17,7 +17,7 @@ import javax.swing.JRadioButton;
 public class RegisterPage extends StartingTemplate {
 
     private JTextField usernameTextField, nameTextField, phoneNumberTextField;
-    private JPasswordField passwordField;
+    private JPasswordField passwordField, confirmPasswordField;
     private JButton registerButton;
     private JRadioButton managerRadioButton, trainerRadioButton;
     private JButton backButton;
@@ -36,7 +36,7 @@ public class RegisterPage extends StartingTemplate {
      */
     public void setComponentPanel() {
 
-        GridLayout gridLayout = new GridLayout(16, 1);
+        GridLayout gridLayout = new GridLayout(18, 1);
         gridLayout.setVgap(5);
         getComponentPanel().setLayout(gridLayout);
 
@@ -46,6 +46,17 @@ public class RegisterPage extends StartingTemplate {
         getComponentPanel().add(headerLabel);
 
         getComponentPanel().add(getNullLabel());
+
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setForeground(Color.GRAY);
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        getComponentPanel().add(nameLabel);
+
+        nameTextField = new JTextField();
+        nameTextField.setFont(new Font("Arial", Font.BOLD, 16));
+        nameTextField.setForeground(Color.black);
+        nameTextField.setBorder(createMatteBorder(0, 0, 2, 0, Color.blue));
+        getComponentPanel().add(nameTextField);
 
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setForeground(Color.GRAY);
@@ -69,16 +80,16 @@ public class RegisterPage extends StartingTemplate {
         passwordField.setBorder(createMatteBorder(0, 0, 2, 0, Color.blue));
         getComponentPanel().add(passwordField);
 
-        JLabel nameLabel = new JLabel("Name");
-        nameLabel.setForeground(Color.GRAY);
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        getComponentPanel().add(nameLabel);
+        passwordLabel = new JLabel("Confirm Password");
+        passwordLabel.setForeground(Color.GRAY);
+        passwordLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        getComponentPanel().add(passwordLabel);
 
-        nameTextField = new JTextField();
-        nameTextField.setFont(new Font("Arial", Font.BOLD, 16));
-        nameTextField.setForeground(Color.black);
-        nameTextField.setBorder(createMatteBorder(0, 0, 2, 0, Color.blue));
-        getComponentPanel().add(nameTextField);
+        confirmPasswordField = new JPasswordField();
+        confirmPasswordField.setForeground(Color.black);
+        confirmPasswordField.setFont(new Font("Arial", Font.BOLD, 16));
+        confirmPasswordField.setBorder(createMatteBorder(0, 0, 2, 0, Color.blue));
+        getComponentPanel().add(confirmPasswordField);
 
         JLabel phoneNumberLabel = new JLabel("Phone Number");
         phoneNumberLabel.setForeground(Color.GRAY);
@@ -167,5 +178,9 @@ public class RegisterPage extends StartingTemplate {
 
     public JButton getBackButton() {
         return backButton;
+    }
+
+    public JPasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
     }
 }

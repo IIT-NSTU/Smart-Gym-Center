@@ -23,18 +23,6 @@ public class User {
 
     /**
      * Constructor OverLoading used by Parameterised Constructor
-     *
-     * @param trainID TrainID of Customer
-     * @param ID ID of Customer
-     * @param name Name of Customer
-     * @param phoneNumber PhoneNumber of Customer
-     * @param trainerID TrainerID fo Specific Trainer
-     * @param session Session Name
-     * @param time Time Period
-     * @param completed Boolean Value Session Completed or not
-     * @param amount Amount of Payment that Customer Paid
-     * @param collected Boolean Value Amount Collected By Trainer or not
-     * @param feedback FeedBack From Trainer
      */
     public User (String trainID,String ID, String name, String phoneNumber, String trainerID, String session, String time, boolean completed, int amount,boolean collected,String feedback) {
         this.trainID = trainID;

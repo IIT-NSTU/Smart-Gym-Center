@@ -11,16 +11,6 @@ public class AdminUser {
     private String phoneNumber;
     private String role;
 
-    /**
-     * Admin User or Manager/Trainer Class Constructor
-     *
-     * @param ID Unique ID of Manager/Trainer
-     * @param userName  UserName of Manager/Trainer
-     * @param password Password of Manager/Trainer
-     * @param name Name of Manager/Trainer
-     * @param phoneNumber Phone Number of Manager/Trainer
-     * @param role Admin User Role Manager or Trainer
-     */
     public AdminUser (String ID, String userName, String password,
                       String name, String phoneNumber, String role) {
         this.ID = ID;

@@ -20,9 +20,6 @@ public class Trainer {
 
     /**
      * Constructor OverLoading used by Parameterised Constructor
-     * @param ID ID of Trainer
-     * @param name Name of Trainer
-     * @param phoneNumber PhoneNumber of Trainer
      */
     public Trainer (String ID, String name, String phoneNumber) {
         this.ID = ID;

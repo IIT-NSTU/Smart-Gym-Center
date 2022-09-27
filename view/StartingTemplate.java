@@ -19,9 +19,6 @@ public class StartingTemplate extends FrameSetup {
         setPicturePanel();
     }
 
-    /**
-     *  Sets Container
-     */
     public void setContainer() {
         //Method Overriding Concept Used
 
@@ -30,9 +27,6 @@ public class StartingTemplate extends FrameSetup {
         getContainer().setLayout(new BorderLayout(100, 30));
     }
 
-    /**
-     *  Sets Panels
-     */
     public void setPanels() {
         getContainer().add(getNullLabel(), BorderLayout.EAST);
         getContainer().add(getNullLabel(), BorderLayout.WEST);
@@ -52,9 +46,6 @@ public class StartingTemplate extends FrameSetup {
         mainPanel.add(componentPanel);
     }
 
-    /**
-     * Sets Picture Panel
-     */
     public void setPicturePanel() {
         JLabel pictureLabel = new JLabel(getDisplayPicture());
         picturePanel.add(pictureLabel);

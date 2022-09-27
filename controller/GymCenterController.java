@@ -9,20 +9,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 
-/**
- * This class contains all the controlling methods between View(Front-End) and Model(Back-End) class.
- */
 public class GymCenterController {
 
-    GymCenterModel model; // Variable of type GymCentreManagementSystemModel
-    GymCentreView view; // Variable of type GymCentreManagementSystemView
+    GymCenterModel model;
+    GymCentreView view;
 
-    /**
-     * GymCentreManagementSystemController Constructor Sets Model and View
-     *
-     * @param model Model
-     * @param view View
-     */
     public GymCenterController(GymCenterModel model, GymCentreView view) {
         this.model = model;
         this.view = view;
@@ -42,6 +33,7 @@ public class GymCenterController {
         view.getRegisterPage().getRegisterButton().addActionListener(e-> {
             String userName = view.getRegisterPage().getUsernameTextField().getText();
             String password = view.getRegisterPage().getPasswordField().getText();
+            String confirmPassword = view.getRegisterPage().getConfirmPasswordField().getText();
             String name = view.getRegisterPage().getNameTextField().getText();
             String phoneNumber = view.getRegisterPage().getPhoneNumberTextField().getText();
             String role = "";
@@ -56,21 +48,28 @@ public class GymCenterController {
                 JOptionPane.showMessageDialog(null,"Please enter a password of minimum 6 characters.");
                 return;
             }
+            if (phoneNumber.length() != 11) {
+                JOptionPane.showMessageDialog(null,"Please enter a valid number");
+                return;
+            }
+
+            if (!password.equals(confirmPassword)) {
+                System.out.println(password + " " + confirmPassword);
+                JOptionPane.showMessageDialog(null,"Password Does Not Match");
+                return;
+            }
+
+            if (userName.charAt(0) >= (char)48 && userName.charAt(0) <= (char)57) {
+                JOptionPane.showMessageDialog(null,"Username can not contain number only.");
+                return;
+            }
 
             if (model.writeAdminRegistrationData(userName, password, name, phoneNumber, role)) {
-                if (role.equals("Manager")) {
+                JOptionPane.showMessageDialog(null,"Trainer added successful.");
                     view.getRegisterPage().dispose();
                     view.setManagerPage(new ManagerPage(0));
                     view.getManagerPage().setVisible(true);
                     setManagerPageButton();
-
-                } else if (role.equals("Trainer")) {
-                    view.getRegisterPage().dispose();
-                    view.setTrainerPage(new TrainerPage(model.getTrainerIDByNamePasswordRole(userName,password,role),0));
-                    view.getTrainerPage().setVisible(true);
-                    setTrainerPageButton();
-
-                }
             }
         });
     }
@@ -146,7 +145,8 @@ public class GymCenterController {
                 if (model.writeSessionBookingData(userID,trainerID,session,time,amount)) {
                     JOptionPane.showMessageDialog(null,"Session Booked Successfully");
                 }
-            }catch (NullPointerException ex) {ex.getMessage();}
+            }
+            catch (NullPointerException ex) {ex.getMessage();}
         });
     }
 
@@ -157,7 +157,8 @@ public class GymCenterController {
         view.getTrainerPage().getReportGenerateButton().addActionListener(e->{
             try {
                 view.getTrainerPage().getEditorPane().print();
-            } catch (PrinterException ex) {
+            }
+            catch (PrinterException ex) {
 
             }
         });
@@ -170,7 +171,8 @@ public class GymCenterController {
         view.getManagerPage().getReportGenerateButton().addActionListener(e->{
             try {
                 view.getManagerPage().getManagerReportTextArea().print();
-            } catch (PrinterException ex) {
+            }
+            catch (PrinterException ex) {
 
             }
         });
@@ -272,7 +274,8 @@ public class GymCenterController {
                     view.setManagerPage(new ManagerPage(3));
                     view.getManagerPage().setVisible(true);
                     setManagerPageButton();
-                } else {
+                }
+                else {
                     JOptionPane.showMessageDialog(null, "Session Already Exists");
                 }
             }
@@ -287,7 +290,8 @@ public class GymCenterController {
             String session="";
             try {
                 session = view.getManagerPage().getDeleteSessionComboBox().getSelectedItem().toString();
-            }catch (NullPointerException ex) {}
+            }
+            catch (NullPointerException ex) {}
 
             if(model.deleteSession(session)) {
                 JOptionPane.showMessageDialog(null,"Session Deleted "+session+" Successfully");
@@ -295,7 +299,8 @@ public class GymCenterController {
                 view.setManagerPage(new ManagerPage(3));
                 view.getManagerPage().setVisible(true);
                 setManagerPageButton();
-            } else {
+            }
+            else {
                 JOptionPane.showMessageDialog(null,"No Sessions to Delete");
             }
         });
@@ -318,21 +323,24 @@ public class GymCenterController {
                 if (user.isCollected()) {
                     view.getTrainerPage().getPaymentCollectedCheckBox().setSelected(true);
                     view.getTrainerPage().getPaymentCollectedCheckBox().setEnabled(false);
-                } else {
+                }
+                else {
                     view.getTrainerPage().getPaymentCollectedCheckBox().setEnabled(true);
                 }
 
                 if (user.isCompleted()) {
                     view.getTrainerPage().getSessionCompletedCheckBox().setSelected(true);
                     view.getTrainerPage().getSessionCompletedCheckBox().setEnabled(false);
-                } else {
+                }
+                else {
                     view.getTrainerPage().getSessionCompletedCheckBox().setEnabled(true);
                 }
 
                 view.getTrainerPage().getFeedbackTextField().setEnabled(true);
 
                 clickTrainerPageShowInfoButton();
-            }catch (NullPointerException exception) {
+            }
+            catch (NullPointerException exception) {
                 JOptionPane.showMessageDialog(null,"Invalid Selection");
             }
         });
@@ -367,7 +375,8 @@ public class GymCenterController {
                     view.getTrainerPage().setVisible(true);
                     setTrainerPageButton();
                 }
-            }catch (Exception ex) {
+            }
+            catch (Exception ex) {
 
             }
         });

@@ -4,34 +4,17 @@ import javax.swing.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-/**
- * This is the Model CLass of this Project. It Contains ALl the BackEnd programs or Methods that makes the project Alve.
- */
 public class GymCenterModel {
 
-    /**
-     *  List of Admin Users of CLass type AdminUser means Manager or Train
-     */
     private List<AdminUser> adminUserList;
-    /**
-     *  List of Users of CLass type User means Customers
-     */
     private List<User> userList;
-    /**
-     *  List of Trainers of CLass type Trainer
-     */
     private List<Trainer> trainerList;
-    /**
-     *  List of Sessions of CLass type String
-     */
     private List<String> sessionList;
 
-    /**
-     * GymCentreManagementSystemModel Constructor sets AdminUserList,TrainerList and SessionList
-     */
     public GymCenterModel() {
         setAdminUserList();
         setTrainerList();
@@ -39,17 +22,8 @@ public class GymCenterModel {
     }
 
     /**
-     *
      * This Method Sets All Admin User Registration Data to File and
      * Checks the data is valid or not. After Registration According to role Manager Page or Trainer
-     * Page Opens.
-     *
-     * @param userName UserName of Manager/Trainer
-     * @param password Password of Manager/Trainer
-     * @param name ame of Manager/Trainer
-     * @param phoneNumber Phone Number of Manager/Trainer
-     * @param role Admin User Role Manager or Trainer
-     * @return Boolean value true or False that successfully added to file or not
      */
     public boolean writeAdminRegistrationData(String userName, String password,
                                       String name, String phoneNumber, String role) {
@@ -57,10 +31,12 @@ public class GymCenterModel {
         if(userName.equals("") || password.equals("") || name.equals("") || phoneNumber.equals("") || role.equals("")) {
             JOptionPane.showMessageDialog(null,"Please Enter All Information");
             return false;
-        } else if (adminAlreadyExists(userName,password,name,phoneNumber,role)) {
+        }
+        else if (adminAlreadyExists(userName,password,name,phoneNumber,role)) {
             JOptionPane.showMessageDialog(null,"These Data Already Exists");
             return false;
-        } else {
+        }
+        else {
             try {
                 BufferedWriter bufferedWriter =
                         new BufferedWriter(new FileWriter("AdminUserData.txt", true));
@@ -103,7 +79,6 @@ public class GymCenterModel {
 
     /**
      * This method Sets the User Means Customer Data to userList From Specific trainerID.txt File Because trainerID.txt File contains all Training Data
-     * @param trainerID Specific TrainerID To get the Data
      */
     public void setUserListForSpecificTrainer(String trainerID) {
         userList = new ArrayList<>();
@@ -142,7 +117,6 @@ public class GymCenterModel {
 
     /**
      * This Method Returns Random Number Between 10000000 and 20000000
-     * @return random Number
      */
     public int getRandomNumber() {
         return (int) ((Math.random() * (20000000 - 10000000)) + 10000000);
@@ -150,13 +124,6 @@ public class GymCenterModel {
 
     /**
      * This Method Checks Admin Means Manager or Trainer Is Already in the adminUserList or Not
-     *
-     * @param userName UserName of Manager/Trainer
-     * @param password Password of Manager/Trainer
-     * @param name Name of Manager/Trainer
-     * @param phoneNumber Phone Number of Manager/Trainer
-     * @param role Admin User Role Manager or Trainer
-     * @return Boolean Value True if Already Exists, false otherwise
      */
     public boolean adminAlreadyExists(String userName, String password,
                                  String name, String phoneNumber, String role) {
@@ -175,10 +142,6 @@ public class GymCenterModel {
 
     /**
      * This Method Checks User Means Customer Is Already in the userList or Not
-     *
-     * @param name Name of Customer
-     * @param phoneNumber PhoneNumber of Customer
-     * @return Boolean Value True if Already Exists, false otherwise
      */
     public boolean userAlreadyExists(String name, String phoneNumber) {
         try{
@@ -192,25 +155,23 @@ public class GymCenterModel {
                 }
             }
             bufferedReader.close();
-        }catch (IOException e) {}
+        }
+        catch (IOException e) {}
 
         return false;
     }
 
     /**
      * This Method Checks Admin Means Manager or Trainer can Login or Not
-     *
-     * @param userName UserName of Manager/Trainer
-     * @param password Password of Manager/Trainer
-     * @param role Admin User Role Manager or Trainer
-     * @return Boolean Value True Login Information Matches, false otherwise
      */
     public boolean canLogin(String userName, String password,String role) {
         if (userName.equals("") || password.equals("") || role.equals("")) {
             return false;
-        } else if (userName.equals("admin") && password.equals("admin") && role.equals("Manager")) {
+        }
+        else if (userName.equals("admin") && password.equals("admin") && role.equals("Manager")) {
             return true;
-        } else {
+        }
+        else {
             for (AdminUser adminUser : adminUserList) {
                 if (adminUser.getUserName().equals(userName)
                         && adminUser.getPassword().equals(password)
@@ -224,10 +185,6 @@ public class GymCenterModel {
 
     /**
      * This Method Writes User means Customer data to File and also Validates data
-     *
-     * @param name Name of Customer
-     * @param phoneNumber Phone Number of Customer
-     * @return Boolean Value True if Successfully write to File, false otherwise
      */
     public boolean writeUserRegistrationData(String name, String phoneNumber) {
 
@@ -237,23 +194,23 @@ public class GymCenterModel {
         } else if (userAlreadyExists(name,phoneNumber)) {
             JOptionPane.showMessageDialog(null,"These Data Already Exists");
             return false;
-        } else {
+        }
+        else {
             try {
                 BufferedWriter bufferedWriter =
                         new BufferedWriter(new FileWriter("UserData.txt", true));
                 bufferedWriter.append("U"+ getRandomNumber() + ","
                         + name  + "," + phoneNumber +"\n");
                 bufferedWriter.close();
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
             return true;
         }
     }
-
     /**
      * This Method returns trainerList as Object[] for the ComboBox Value
-     * @return TrainerList as Object[]
      */
     public Object[] getTrainers() {
         setTrainerList();
@@ -262,7 +219,6 @@ public class GymCenterModel {
 
     /**
      * This Method returns All User Info(ID Name) as Object[] for the ComboBox Value
-     * @return All User Info as Object[]
      */
     public Object[] getALLUsers() {
         List<String> userList = new ArrayList<>();
@@ -281,40 +237,34 @@ public class GymCenterModel {
 
     /**
      * This Method Sets All Session Booking Data to File and
-     * Checks the data is valid or not.
-     *
-     * @param userID UserID of Customer
-     * @param trainerID trainerID of trainer from him Customer is taking service
-     * @param session Session of Customer
-     * @param time Time Duration or Period of Customer
-     * @param amount Amount of payment that Customer Paid
-     * @return @return Boolean Value True if Successfully write to File, false otherwise
+      Checks the data is valid or not.
      */
     public boolean writeSessionBookingData(String userID,String trainerID,String session, String time,String amount) {
 
         if(userID.equals("")||trainerID.equals("")||session.equals("")||time.equals("")||amount.equals("")) {
             JOptionPane.showMessageDialog(null,"Please Enter All Information");
             return false;
-        } else if (userWithTrainerSessionTimeAlreadyExists(userID,trainerID,session,time)) {
+        }
+        else if (userWithTrainerSessionTimeAlreadyExists(userID,trainerID,session,time)) {
             JOptionPane.showMessageDialog(null,"User Booking Information Already Exists");
             return false;
-        }else if(!isTrainerAvailable(trainerID,time)){
-            JOptionPane.showMessageDialog(null,"Trainer is Not Available");
+        }
+        else if(!isTrainerAvailable(trainerID,time)){
+            JOptionPane.showMessageDialog(null,"Trainer is Not Available " + getAvailableTimes(trainerID));
             return false;
         } else {
             try{
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(trainerID+".txt",true));
                 bufferedWriter.append("H"+getRandomNumber()+","+getUserInfoByID(userID)+","+trainerID+","+session+","+time+","+false+","+amount+","+false+","+"feedback"+"\n");
                 bufferedWriter.close();
-            } catch (IOException e) {e.printStackTrace();}
+            }
+            catch (IOException e) {e.printStackTrace();}
         }
         return true;
     }
 
     /**
      * This Method Takes UserID and returns UserInfo as String
-     * @param userID UserID of Customer
-     * @return UserInfo as String
      */
     public String getUserInfoByID (String userID) {
         String userInfo = "";
@@ -333,12 +283,6 @@ public class GymCenterModel {
 
     /**
      * This Method Checks if Session Data of a Customer with a trainer is Already Exists or NOT
-     *
-     * @param userID UserID of Customer
-     * @param trainerID trainerID of trainer from him Customer is taking service
-     * @param session Session of Customer
-     * @param time Time Duration or Period of Customer
-     * @return Boolean value true if Data Already Exists, false otherwise
      */
     public boolean userWithTrainerSessionTimeAlreadyExists(String userID,String trainerID,String session, String time){
         setUserListForSpecificTrainer(trainerID);
@@ -352,10 +296,6 @@ public class GymCenterModel {
 
     /**
      * This Method Checks if Trainer is Available at a specific time period
-     *
-     * @param trainerID trainerID of trainer from him Customer is taking service
-     * @param time Time Duration or Period of Customer
-     * @return Boolean value true if Trainer is Availble, false otherwise
      */
     public boolean isTrainerAvailable(String trainerID, String time) {
         setUserListForSpecificTrainer(trainerID);
@@ -368,11 +308,22 @@ public class GymCenterModel {
         return true;
     }
 
+    public String getAvailableTimes(String trainerID) {
+        setUserListForSpecificTrainer(trainerID);
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(getTimeList()));
+
+        for (User user : userList) {
+            list.remove(user.getTime());
+        }
+        StringBuilder output = new StringBuilder("\n\nAvailable Times Are").append("\n");
+        for (String s : list) {
+            output.append(s).append("\n");
+        }
+        return output.toString();
+    }
+
     /**
      * This Method Takes trainerID and Returns TrainerName of type String
-     *
-     * @param trainerID TrainerID of Trainer
-     * @return Trainer Name
      */
     public String getTrainerNameByID (String trainerID) {
         String name = "";
@@ -387,8 +338,6 @@ public class GymCenterModel {
 
     /**
      * This Method Takes trainerID and Returns Trainer of type Trainer
-     * @param trainerID TrainerID of Trainer
-     * @return trainer of Type Trainer
      */
     public Trainer getTrainerByID (String trainerID) {
         setTrainerList();
@@ -412,8 +361,6 @@ public class GymCenterModel {
 
     /**
      * This method returns HTML Contents for design purpose only of type String
-     * @param trainerID TrainerID of Trainer
-     * @return HTML Contest as String
      */
     public String getHTMLContentOFTrainer(String trainerID) {
 
@@ -424,7 +371,7 @@ public class GymCenterModel {
 
         htmlText = htmlText +
                 "<table width=\"100%\">"
-                +"<tr style=\"text-align:center;font-size:22px;font-weight:bold;font-family:arial;color:blue;\">APU GYM CENTER</tr>"
+                +"<tr style=\"text-align:center;font-size:22px;font-weight:bold;font-family:arial;color:blue;\">SMART GYM CENTER</tr>"
                 +"</table>"
                 +"<table width=\"100%\">"
                 +"<tr style=\"text-align:center;font-size:13px;font-weight:bold;font-family:arial;\">Trainer Information</tr>"
@@ -510,7 +457,6 @@ public class GymCenterModel {
 
     /**
      * This Method return Date and Time of a specific format
-     * @return Date and Time
      */
     public String getDate()
     {
@@ -521,11 +467,6 @@ public class GymCenterModel {
 
     /**
      * This method takes UserName,Password, Role as input and Returns TrainerID as String
-     *
-     * @param userName UserName of Trainer
-     * @param password Password of Trainer
-     * @param role Role Trainer
-     * @return TrainerID as String
      */
     public String getTrainerIDByNamePasswordRole(String userName,String password,String role) {
         setAdminUserList();
@@ -575,8 +516,6 @@ public class GymCenterModel {
 
     /**
      * This method takes Session Name as String and deletes it from SessionList
-     * @param session Session Name
-     * @return Boolean value true if successfully Deleted, false otherwise
      */
     public boolean deleteSession(String session) {
 
@@ -591,8 +530,6 @@ public class GymCenterModel {
 
     /**
      * This method takes session name as input and adds to SessionList
-     * @param session Session Name
-     * @return Boolean value true if successfully Added, false otherwise
      */
     public boolean addSession(String session) {
         setSessionList();
@@ -606,7 +543,6 @@ public class GymCenterModel {
 
     /**
      * This Method returns all session names from sessionList of type Object[]
-     * @return session names of type Object[]
      */
     public Object[] getSessionList() {
         setSessionList();
@@ -615,17 +551,14 @@ public class GymCenterModel {
 
     /**
      * This Method returns all time periods of type String[]
-     * @return time of type String[]
      */
     public String[] getTimeList() {
-        String[] time = {"9AM - 10AM","10AM - 11AM","11AM - 1PM","2PM - 3PM","3PM - 4PM","4PM - 5PM"};
+        String[] time = {"9AM - 9.45AM","10AM - 10.45AM","3PM - 3.45PM","4PM - 4.45PM"};
         return time;
     }
 
     /**
      * This method returns trainID_CustomerName from userList of type String[]
-     * @param trainerID TrainerID of Trainer
-     * @return trainID_Name of type String[]
      */
     public String[] getTrainIDName(String trainerID) {
         setUserListForSpecificTrainer(trainerID);
@@ -638,9 +571,6 @@ public class GymCenterModel {
 
     /**
      * This method takes TrainID,TrainerID and returns user object of type User
-     * @param trainID TrainID of Customer
-     * @param trainerID Trainer ID of Trainer
-     * @return user object of type User
      */
     public User getUserByTrainID(String trainID,String trainerID) {
 
@@ -657,11 +587,9 @@ public class GymCenterModel {
 
     /**
      * This Method returns Content or Text of type String [For design purpose only] of a Specific User
-     * @param user user object of Type User
-     * @return content or text of type String
      */
     public String getContentForSpecificUser(User user) {
-        String text = "\n\n    APU\n    GYM CENTRE\n\n"
+        String text = "\n\n    SMART\n    GYM CENTRE\n\n"
                 +"    TrainID : "+user.getTrainID()+"\n"
                 +"    Customer ID : "+user.getID()+"\n"
                 +"    Customer Name : "+user.getName()+"\n"
@@ -728,17 +656,16 @@ public class GymCenterModel {
 
     /**
      * This Method return Manager Report as String
-     * @return Manager Report as String
      */
     public String getManagerReport() {
 
-        String outPutString = "\n\n    APU\n    GYM CENTRE\n\n    Date & Time : "+getDate()+"\n\n";
+        String outPutString = "\n\n    SMART\n    GYM CENTRE\n\n    Date & Time : "+getDate()+"\n\n";
 
         outPutString = outPutString +
-                 "    APU GYM Center Total Customer : " + getALLUsers().length+"\n"
-                +"    APU GYM Center Total Trainer : " + trainerList.size()+"\n"
-                +"    APU GYM Center Total Manager : " + (adminUserList.size()-trainerList.size())+"\n"
-                +"    APU GYM Center Total Employee : " + (adminUserList.size())+"\n\n"
+                 "    SMART GYM Center Total Customer : " + getALLUsers().length+"\n"
+                +"    SMART GYM Center Total Trainer : " + trainerList.size()+"\n"
+                +"    SMART GYM Center Total Manager : " + (adminUserList.size()-trainerList.size())+"\n"
+                +"    SMART GYM Center Total Employee : " + (adminUserList.size())+"\n\n"
                 +"    Total Number of Customer in Each Session\n    Session-No. of customers\n";
 
         boolean flag = true;
@@ -767,7 +694,7 @@ public class GymCenterModel {
         }
 
         outPutString = outPutString +
-                "\n    APU GYM Center Total Income : " + customerAmount+"\n\n"
+                "\n    SMART GYM Center Total Income : " + customerAmount+"\n\n"
                +"    FeedBack From All Trainer\n\n"+feedbackString;
 
         return outPutString;
@@ -775,8 +702,6 @@ public class GymCenterModel {
 
     /**
      * This Method Takes a Character of type char and returns if it is Digit or Not
-     * @param ch  Character of type char
-     * @return Boolean value if Character is digit, false Otherwise
      */
     public boolean isDigit(char ch) {
         if (ch=='0'||ch=='1'||ch=='2'||ch=='3'||ch=='4'||ch=='5'||ch=='6'||ch=='7'||ch=='8'||ch=='9'||ch==(char)10||ch==(char)8) {

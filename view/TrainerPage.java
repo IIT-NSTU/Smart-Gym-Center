@@ -21,8 +21,6 @@ public class TrainerPage extends AdminTemplate{
 
     /**
      * Trainer Page Constructor
-     * @param trainerID
-     * @param tabIndex
      */
     public TrainerPage(String trainerID,int tabIndex) {
         this.trainerID = trainerID;
@@ -145,14 +143,21 @@ public class TrainerPage extends AdminTemplate{
 
 
     public void setLogoutPanel() {
-        logoutPanel = new JPanel();
-        logoutPanel.setLayout(new BorderLayout());
+        logoutPanel = new ImagePanel(new ImageIcon("GYM.jpg").getImage());
+        logoutPanel.setLayout(new BorderLayout(250, 150));
 
-        logoutButton = new JButton(getLogoutPageIcon());
+        logoutPanel.add(getNullLabel(),BorderLayout.EAST);
+        logoutPanel.add(getNullLabel(),BorderLayout.WEST);
+        logoutPanel.add(getNullLabel(),BorderLayout.NORTH);
+        logoutPanel.add(getNullLabel(),BorderLayout.SOUTH);
+
+        logoutButton = new JButton("Log Out");
+        logoutButton.setFont(new Font("Arial", Font.BOLD, 20));
         logoutButton.setBorder(null);
         logoutButton.setFocusPainted(false);
+        logoutButton.setBackground(Color.BLUE);
+        logoutButton.setForeground(Color.WHITE);
         logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        logoutButton.setBackground(Color.WHITE);
         logoutPanel.add(logoutButton,BorderLayout.CENTER);
     }
 
@@ -206,9 +211,5 @@ public class TrainerPage extends AdminTemplate{
 
     public void setTrainID(String trainID) {
         this.trainID = trainID;
-    }
-
-    public static void main(String[] args) {
-         new TrainerPage("11", 0).setVisible(true);
     }
 }
